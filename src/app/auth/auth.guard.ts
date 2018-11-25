@@ -4,14 +4,16 @@ import {
     ActivatedRouteSnapshot,
     RouterStateSnapshot,
     CanActivateChild,
-    NavigationExtras
+    Route,
+    NavigationExtras,
+    CanLoad
 } from '@angular/router';
 import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     constructor(private authService: AuthService, private router: Router) {}
 
@@ -26,6 +28,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
         return this.canActivate(route, state);
+    }
+
+    canLoad(route: Route): boolean {
+        const url = `/${route.path}`;
+        return this.checkLogin(url);
     }
 
     checkLogin(url: string): boolean {
