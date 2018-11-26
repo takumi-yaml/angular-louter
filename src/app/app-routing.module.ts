@@ -23,7 +23,7 @@ const appRoutes: Routes = [
         loadChildren: './crisis-center/crisis-center.module#CrisisCenterModule',
         data: {preload: true}
     },
-    {path: '', redirectTo: '/heroes', pathMatch: 'full'},
+    {path: '', redirectTo: '/superheroes', pathMatch: 'full'},
     {path: '**', component: PageNotFoundComponent}
 ];
 
